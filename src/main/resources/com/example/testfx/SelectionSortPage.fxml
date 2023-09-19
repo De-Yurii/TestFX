@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="636.0" prefWidth="600.0" styleClass="border-pane" stylesheets="@settings.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="com.example.testfx.Controller">
+<left>
+    <VBox alignment="CENTER" prefHeight="363.0" prefWidth="181.0" spacing="20.0" styleClass="vbox" stylesheets="@settings.css" BorderPane.alignment="CENTER">
+        <children>
+            <TextField fx:id="sizeOfArray" promptText="Enter size of the array">
+                <VBox.margin>
+                    <Insets left="20.0" right="20.0" />
+                </VBox.margin>
+            </TextField>
+            <Button fx:id="generateButton" mnemonicParsing="false" onAction="#onGenerateAction" stylesheets="@settings.css" text="Generate" />
+            <Button fx:id="sortButton" mnemonicParsing="false" onAction="#onSortButtonClicked" stylesheets="@settings.css" text="Sort" />
+            <Button mnemonicParsing="false" onAction="#onCheckButtonClicked" stylesheets="@settings.css" text="Check" />
+        </children>
+    </VBox>
+</left>
+<center>
+    <AnchorPane prefHeight="371.0" prefWidth="431.0" BorderPane.alignment="CENTER">
+        <children>
+            <TextArea fx:id="startText" editable="false" layoutX="113.0" layoutY="86.0" prefHeight="200.0" prefWidth="200.0" />
+        </children>
+    </AnchorPane>
+</center>
+</BorderPane>

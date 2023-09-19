@@ -1,0 +1,49 @@
+.tool-bar {
+    -fx-spacing: 20px;
+}
+.button{
+    -fx-pref-height: 30;
+    -fx-pref-width: 150;
+    -fx-font-size: 14;
+    -fx-background-color: #00457E;
+    -fx-background-radius: 10;
+    -fx-text-fill: #ffffff;
+
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color: #2F70AF;
+    -fx-text-fill: #ffffff;
+}
+.av-tab-section-container {
+    border-color: transparent !important;
+}
+
+.tab-pane > .tab-header-area > .headers-region {
+    -fx-border-width: 20;
+}
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-style: segments(0.166667em, 0.166667em);
+    -fx-border-width: 0;
+    -fx-padding: 5 5 5 5;
+    -fx-border-color: -fx-focus-color;
+}
+
+.text-field {
+    -fx-padding: 5 5 5 5;
+    -fx-background-radius: 10;
+}
+.vbox{
+    -fx-background-color: #2F70AF;
+    -fx-background-radius: 0 15 15 0;
+}
+.text-area{
+    -fx-pref-width: 300;
+    -fx-pref-height: 200;
+    -fx-background-radius:20;
+    -fx-border-radius: 20;
+}
+.border-pane{
+    -fx-background-color: #aae4#beecf7f2;
+    -fx-padding: 0;
+}

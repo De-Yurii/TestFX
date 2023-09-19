@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="569.0" prefWidth="600.0" styleClass="border-pane" stylesheets="@settings.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testfx.PersonalTaskControler">
+    <left>
+        <VBox alignment="CENTER" prefHeight="363.0" prefWidth="181.0" spacing="20.0" styleClass="vbox" stylesheets="@settings.css" BorderPane.alignment="CENTER">
+            <children>
+            <TextField fx:id="amountOfRows" promptText="Enter rows count" style="-fx-background-radius: 10;" stylesheets="@settings.css">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </TextField>
+                <TextField fx:id="amountOfColums" promptText="Enter column count">
+                    <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                    </VBox.margin>
+                </TextField>
+                <Button fx:id="generateButton" mnemonicParsing="false" onAction="#generateButtonPressed" stylesheets="@settings.css" text="Generate" textFill="WHITE" />
+                <Button fx:id="sortButton" mnemonicParsing="false" onAction="#sortButtonPressed" stylesheets="@settings.css" text="Sort" />
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <AnchorPane prefHeight="613.0" prefWidth="418.0" BorderPane.alignment="CENTER">
+            <children>
+                <TextArea fx:id="textArea" editable="false" layoutX="113.0" layoutY="86.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 20;" styleClass="text-area" stylesheets="@settings.css" />
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="border-pane" stylesheets="@settings.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" stylesheets="@settings.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Selection Sort">
+               <content>
+                  <fx:include source="SelectionSortPage.fxml" />
+               </content>
+          </Tab>
+          <Tab text="Personal task">
+            <content>
+              <fx:include source="PersonalTask.fxml" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>
