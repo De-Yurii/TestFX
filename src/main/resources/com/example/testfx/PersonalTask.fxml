@@ -4,34 +4,34 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="569.0" prefWidth="600.0" styleClass="border-pane" stylesheets="@settings.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testfx.PersonalTaskControler">
     <left>
         <VBox alignment="CENTER" prefHeight="363.0" prefWidth="181.0" spacing="20.0" styleClass="vbox" stylesheets="@settings.css" BorderPane.alignment="CENTER">
             <children>
-            <TextField fx:id="amountOfRows" promptText="Enter rows count" style="-fx-background-radius: 10;" stylesheets="@settings.css">
+            <TextField fx:id="amountOfRows" promptText="Enter amount of numbers" style="-fx-background-radius: 10;" stylesheets="@settings.css">
                <VBox.margin>
                   <Insets left="20.0" right="20.0" />
                </VBox.margin>
             </TextField>
-                <TextField fx:id="amountOfColums" promptText="Enter column count">
-                    <VBox.margin>
-                        <Insets left="20.0" right="20.0" />
-                    </VBox.margin>
-                </TextField>
                 <Button fx:id="generateButton" mnemonicParsing="false" onAction="#generateButtonPressed" stylesheets="@settings.css" text="Generate" textFill="WHITE" />
                 <Button fx:id="sortButton" mnemonicParsing="false" onAction="#sortButtonPressed" stylesheets="@settings.css" text="Sort" />
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonPressed" text="Delete" />
             </children>
         </VBox>
     </left>
-    <center>
-        <AnchorPane prefHeight="613.0" prefWidth="418.0" BorderPane.alignment="CENTER">
-            <children>
-                <TextArea fx:id="textArea" editable="false" layoutX="113.0" layoutY="86.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 20;" styleClass="text-area" stylesheets="@settings.css" />
-            </children>
-        </AnchorPane>
-    </center>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="246.0" prefWidth="418.0">
+               <children>
+                  <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
 </BorderPane>

@@ -4,18 +4,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-import java.util.Random;
+import java.util.*;
 
 public class PersonalTaskControler {
-    private float matrix[][];
+    private ArrayList<Float> array;
     private int numberOfRows;
-    private int numberOfColums;
     @FXML
     TextArea textArea;
     @FXML
     TextField amountOfRows;
-    @FXML
-    TextField amountOfColums;
 
     @FXML
     public void generateButtonPressed(){
@@ -24,55 +21,67 @@ public class PersonalTaskControler {
         }
         try {
             numberOfRows = Integer.parseInt(amountOfRows.getText());
-            numberOfColums = Integer.parseInt(amountOfColums.getText());
         }catch (NumberFormatException e){
             return;
         }
 
-        matrix = new float[numberOfRows][numberOfColums];
+        array = new ArrayList<>();
         for(int i = 0; i < numberOfRows; i++){
-            for(int j = 0; j <numberOfColums; j++){
-
-                Random r = new Random();
-                Float random = -10 + r.nextFloat() * 20;
-                matrix[i][j] = (float) random;
-                textArea.appendText(String.format("%10.3f", random));
-                textArea.appendText("  ");
-            }
-            textArea.appendText("\n");
+            Random r = new Random();
+            Float random = -10 + r.nextFloat() * 20;
+            float scale = (float) Math.pow(10, 1);
+            float result = (float) (Math.ceil(random* scale) / scale);
+            array.add( result);
+            textArea.appendText(String.format("%10.3f", array.get(i)));
+            textArea.appendText("  ");
         }
+        textArea.appendText("\n");
     }
 
     @FXML
     public void sortButtonPressed(){
         int minIndex;
         float min;
-        for(int i = 0; i < numberOfColums; i++){
-            min = matrix[0][i];
-            minIndex = i;
-            for(int j = i; j < numberOfColums; j++){
-                if(matrix[0][j] < min){
-                    min = matrix[0][j];
-                    minIndex = j;
-                }
-            }
-            if(minIndex != i){
-                for(int j = 0; j < numberOfRows; j++){
-                    float temp = matrix[j][i];
-                    matrix[j][i] = matrix[j][minIndex];
-                    matrix[j][minIndex] = temp;
-                }
-            }
-            addMatrix(matrix);
-        }
+        ShellSort.shellSort(array);
+        addMatrix(array);
     }
-    private void addMatrix(float[][] matrix){
+
+    @FXML
+    public void deleteButtonPressed(){
+        Map<Float, Integer> frequencyMap = new HashMap<>();
+
+        for (Float num : array) {
+            int frequency = frequencyMap.getOrDefault(num, 0) + 1;
+            frequencyMap.put(num, frequency);
+        }
+
+        // Find the maximum frequency
+        int maxFrequency = 0;
+        for (int frequency : frequencyMap.values()) {
+            if (frequency > maxFrequency) {
+                maxFrequency = frequency;
+            }
+        }
+
+        // Step 2: Create a new ArrayList with a smaller size
+        int newSize = array.size() - maxFrequency;
+        ArrayList<Float> newFloatList = new ArrayList<>(newSize);
+
+        // Step 3: Copy elements from the original ArrayList to the new ArrayList, excluding the most common float number(s)
+        for (Float num : array) {
+            if (frequencyMap.get(num) != maxFrequency) {
+                newFloatList.add(num);
+            }
+        }
+        array = newFloatList;
+        numberOfRows = newFloatList.size();
+        addMatrix(newFloatList);
+    }
+    private void addMatrix(ArrayList<Float> array){
         textArea.appendText("\n\n");
         for(int i =  0; i < numberOfRows; i++){
-            for(int j = 0; j < numberOfColums; j++){
-                textArea.appendText(String.format("%10.3f", matrix[i][j]));
-            }
-            textArea.appendText("\n");
+                textArea.appendText(String.format("%10.3f", array.get(i)));
         }
+        textArea.appendText("\n");
     }
 }

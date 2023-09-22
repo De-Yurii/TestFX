@@ -13,11 +13,17 @@
                   <fx:include source="SelectionSortPage.fxml" />
                </content>
           </Tab>
-          <Tab text="Personal task">
-            <content>
-              <fx:include source="PersonalTask.fxml" />
-            </content>
-          </Tab>
+            <Tab text="Shell Sort">
+              <content>
+                <fx:include source="ShellSortPage.fxml" />
+              </content>
+            </Tab>
+            <Tab text="Personal Task">
+                <content>
+                    <fx:include source="PersonalTask.fxml" />
+                </content>
+            </Tab>
+
         </tabs>
       </TabPane>
    </center>
