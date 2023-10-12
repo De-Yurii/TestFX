@@ -18,12 +18,30 @@
                 <fx:include source="ShellSortPage.fxml" />
               </content>
             </Tab>
+
+            <Tab text="Quick Sort">
+                <content>
+                    <fx:include source="QuickSortPage.fxml"></fx:include>
+                </content>
+            </Tab>
+
+            <Tab text="Merge Sort">
+                <content>
+                    <fx:include source="MergeSort.fxml"></fx:include>
+                </content>
+            </Tab>
+
+            <Tab text="Counting Sort">
+                <content>
+                    <fx:include source="MergeSort.fxml"></fx:include>
+                </content>
+            </Tab>
+
             <Tab text="Personal Task">
                 <content>
                     <fx:include source="PersonalTask.fxml" />
                 </content>
             </Tab>
-
         </tabs>
       </TabPane>
    </center>

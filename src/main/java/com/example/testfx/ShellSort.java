@@ -40,7 +40,7 @@ public abstract class ShellSort {
         long start = System.currentTimeMillis();
         int h = 1;
         int i = 1;
-        while (Math.pow(2, i)-1 <= array.length / 3) {
+        while (Math.pow(2, i)-1 <= array.length) {
             h = (int) (Math.pow(2, i)-1);
             i++;
         }
@@ -60,12 +60,7 @@ public abstract class ShellSort {
             h -= pow(2, i-2);
             i--;
         }
-        long end = System.currentTimeMillis();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Time of the sorting: " + (end-start) + "ms.");
-        alert.showAndWait();
+
     }
 
     public static void shellSortLogs(int[] array, TextArea textArea){
@@ -78,18 +73,18 @@ public abstract class ShellSort {
 
         while (h > 0) {
             textArea.appendText(String.format("H: %d\n", h));
-            for (int outer = h; outer < array.length; outer++) {
-                int tmp = array[outer];
-                int inner = outer;
+            for (int j = h; j < array.length; j++) {
+                int tmp = array[j];
+                int k = j;
 
-                while (inner > h - 1 && array[inner - h] > tmp) {
-                    array[inner] = array[inner - h];
-                    inner -= h;
+                while (k > h - 1 && array[k - h] > tmp) {
+                    array[k] = array[k - h];
+                    k -= h;
                 }
 
-                array[inner] = tmp;
-                for(int j: array){
-                    textArea.appendText(String.format("%10d", j));
+                array[k] = tmp;
+                for(int n: array){
+                    textArea.appendText(String.format("%10d", n));
                 }
                 textArea.appendText("\n");
             }

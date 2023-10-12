@@ -24,7 +24,7 @@ public class SelectionSortController {
         for(int j = 0; j < numberOfArray; j++){
 
             Random r = new Random();
-            Integer random = (int) Math.floor(Math.random() *(200 + 1) - 100);
+            Integer random = (int) Math.floor(Math.random() *(1000 + 1)-500);
             array[j] = random;
         }
         return array;

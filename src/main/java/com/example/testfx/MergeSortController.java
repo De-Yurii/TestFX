@@ -2,33 +2,26 @@ package com.example.testfx;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
 
-public class ShellSortController {
-    SelectionSortController selectionSortController;
+public class MergeSortController {
+    private SelectionSortController selectionSortController;
     @FXML
     CheckBox isTime;
     @FXML
+    Button generateButton;
+
+    @FXML
     TextArea textArea;
+
+    @FXML
+    Button sortButton;
+
     @FXML
     TextField sizeOfArray;
-    private int[] array;
-    private int arraySize;
 
-    public int getArraySize() {
-        return arraySize;
-    }
-
-    public int[] getArray() {
-        return array;
-    }
     @FXML
     public void onGenerateAction(ActionEvent e){
         if(textArea.getText() != null ){
@@ -43,6 +36,7 @@ public class ShellSortController {
         }
         textArea.appendText("\n");
     }
+
     @FXML
     public void onSortButtonClicked(ActionEvent e){
         if(selectionSortController == null){
@@ -54,7 +48,7 @@ public class ShellSortController {
         }
         if(isTime.isSelected()){
             long start = System.currentTimeMillis();
-            ShellSort.shellSort(selectionSortController.getArray());
+            MergeSort.mergeSort(selectionSortController.getArray(), 0, selectionSortController.getArraySize()-1);
             long end = System.currentTimeMillis();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
@@ -62,11 +56,18 @@ public class ShellSortController {
             alert.setContentText("Time of the sorting: " + (end-start) + "ms.");
             alert.showAndWait();
         }else{
-            ShellSort.shellSortLogs(selectionSortController.getArray(), textArea);
+            ArrayList<String> logs = new ArrayList<>();
+            logs = MergeSort.mergeSortLogs(selectionSortController.getArray(), 0, selectionSortController.getArraySize()-1, logs);
+            for(String i: logs){
+                textArea.appendText(i);
+            }
         }
-        for(int j: selectionSortController.getArray()){
-            textArea.appendText(String.format("%10d", j));
+        textArea.appendText("Sorted array:\n");
+        for(int i: selectionSortController.getArray()){
+            textArea.appendText(String.format("%d ", i));
         }
+        textArea.appendText("\n");
+
     }
 
     @FXML
@@ -101,4 +102,5 @@ public class ShellSortController {
         }
 
     }
+
 }
