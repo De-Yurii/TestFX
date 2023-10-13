@@ -5,9 +5,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class CountingSortController {
-    private SelectionSortController selectionSortController;
+
+    private int[] array;
+    private int arraySize;
     @FXML
     CheckBox isTime;
     @FXML
@@ -21,15 +24,26 @@ public class CountingSortController {
 
     @FXML
     TextField sizeOfArray;
+    public int[] generateArray(int numberOfArray){
+        array = new int[numberOfArray];
+        arraySize  = numberOfArray;
+        for(int j = 0; j < numberOfArray; j++){
+
+            Random r = new Random();
+            Integer random = (int) Math.floor(Math.random() *(10 + 1));
+            array[j] = random;
+        }
+        return array;
+    }
 
     @FXML
     public void onGenerateAction(ActionEvent e){
         if(textArea.getText() != null ){
             textArea.setText("");
         }
-        selectionSortController = new SelectionSortController();
+
         int size = Integer.parseInt(sizeOfArray.getText());
-        int[] mass = selectionSortController.generateArray(size);
+        int[] mass = generateArray(size);
         for(int i = 0; i < size; i++){
             String out = String.format("%10d ", mass[i]);
             textArea.appendText(out);
@@ -39,16 +53,9 @@ public class CountingSortController {
 
     @FXML
     public void onSortButtonClicked(ActionEvent e){
-        if(selectionSortController == null){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("You need to generate array");
-            alert.show();
-            return;
-        }
         if(isTime.isSelected()){
             long start = System.currentTimeMillis();
-            MergeSort.mergeSort(selectionSortController.getArray(), 0, selectionSortController.getArraySize()-1);
+            this.array = CountingSort.sort(this.array, this.arraySize);
             long end = System.currentTimeMillis();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
@@ -57,31 +64,25 @@ public class CountingSortController {
             alert.showAndWait();
         }else{
             ArrayList<String> logs = new ArrayList<>();
-            logs = MergeSort.mergeSortLogs(selectionSortController.getArray(), 0, selectionSortController.getArraySize()-1, logs);
+            logs = CountingSort.sortLogs(this.array, this.arraySize);
             for(String i: logs){
                 textArea.appendText(i);
             }
         }
         textArea.appendText("Sorted array:\n");
-        for(int i: selectionSortController.getArray()){
+        for(int i: array){
             textArea.appendText(String.format("%d ", i));
         }
-        textArea.appendText("\n");
+
 
     }
 
     @FXML
     public void onCheckButtonClicked(ActionEvent e){
-        if(selectionSortController == null){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("You need to generate array");
-            alert.show();
-            return;
-        }
+
         boolean isntSorted = false;
-        int [] array = selectionSortController.getArray();
-        for(int i = 0; i < selectionSortController.getArraySize()-1; i++){
+        int [] array = this.array;
+        for(int i = 0; i < this.arraySize-1; i++){
             if(array[i] > array[i+1]){
                 isntSorted = true;
                 break;

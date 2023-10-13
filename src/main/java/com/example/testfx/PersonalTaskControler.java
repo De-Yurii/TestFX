@@ -9,11 +9,15 @@ import java.util.*;
 public class PersonalTaskControler {
     private float[][] matrix;
     private int numberOfRows;
-    private int numberOfColums;
+    private final ArrayList<String> names = new ArrayList<>();
+    private final ArrayList<String> surnames = new ArrayList<>();
+    private final ArrayList<Student> students = new ArrayList<>();
+
+    private ArrayList<Student> successfulStudents = new ArrayList<>();
+
     @FXML
     TextArea textArea;
-    @FXML
-    TextField amountOfRows;
+
 
     @FXML
     TextField amountOfColums;
@@ -23,76 +27,85 @@ public class PersonalTaskControler {
         if(textArea.getText()!=null){
             textArea.setText("");
         }
+        if(names.isEmpty()){
+            fillNames(names);
+        }
+        if(surnames.isEmpty()){
+            fillSurnames(surnames);
+        }
+        if(!students.isEmpty()){
+            students.clear();
+        }
         try {
-            numberOfRows = Integer.parseInt(amountOfRows.getText());
-            numberOfColums = Integer.parseInt(amountOfColums.getText());
+            numberOfRows = Integer.parseInt(amountOfColums.getText());
+
         }catch (NumberFormatException e){
             return;
         }
 
-        matrix = new float[numberOfColums][numberOfRows];
-        for(int i = 0; i < numberOfColums; i++){
-            for(int j = 0; j < numberOfRows; j++) {
-                Random r = new Random();
-                float random = 0 + r.nextFloat() * 20;
-                float scale = (float) Math.pow(10, 1);
-                float result = (float) (Math.ceil(random * scale) / scale);
-                matrix[i][j] = result;
-            }
+        for(int i = 0; i < numberOfRows; i++){
+            int index = (int)(Math.random() * names.size());
+            String name = names.get(index);
+            index = (int)(Math.random() * surnames.size());
+            String surname = surnames.get(index);
+
+            Random r = new Random();
+            Float random = r.nextFloat() * 5;
+
+            students.add(new Student(name, surname, random));
         }
-        addMatrix(matrix);
+
+
+        addStudents(students);
     }
 
     @FXML
     public void sortButtonPressed(){
-        int minIndex;
-        float min;
-        for(int i = 0; i < numberOfColums; i++){
-            min = matrix[0][i];
-            minIndex = i;
-            for(int j = i; j < numberOfColums; j++){
-                if(matrix[0][j] < min){
-                    min = matrix[0][j];
-                    minIndex = j;
-                }
+        textArea.appendText("Successful students: ");
+        for(Student student: students){
+            if(student.getMark() > 4.001){
+                successfulStudents.add(student);
             }
-            if(minIndex != i){
-                for(int j = 0; j < numberOfRows; j++){
-                    float temp = matrix[j][i];
-                    matrix[j][i] = matrix[j][minIndex];
-                    matrix[j][minIndex] = temp;
-                }
-            }
-            addMatrix(matrix);
         }
+        addStudents(successfulStudents);
+
+        textArea.appendText("\n");
+        textArea.appendText("Sorted students: ");
+        QuickSort.quickSortAlphaberic(successfulStudents, 0, successfulStudents.size()-1);
+        this.addStudents(successfulStudents);
     }
 
-    @FXML
-    public void deleteButtonPressed(){
-        for(int i = 0; i < numberOfColums; i++){
-            float min = matrix[i][0];
-            int min_index = 0;
-            for(int j = 0; j < numberOfRows; j++){
-                if(matrix[i][j] < min){
-                    min = matrix[i][j];
-                    min_index = j;
-                }
-            }
-            matrix[i][min_index] = (float) Math.log(matrix[i][min_index]);
 
-        }
-        addMatrix(matrix);
-    }
-    private void addMatrix(float[][] matrix){
-        if(!(Objects.equals(textArea.getText(), ""))){
-            textArea.appendText("\n\n");
-        }
-        for(int i =  0; i < numberOfColums; i++){
-            for(int j = 0; j < numberOfRows; j++) {
-                textArea.appendText(String.format("%10.3f", matrix[i][j]));
-            }
-            textArea.appendText("\n");
+
+    private void addStudents(ArrayList<Student> students){
+        for(Student student: students){
+            textArea.appendText(student.toString() + "\n");
         }
         textArea.appendText("\n");
+    }
+
+    private void fillNames(ArrayList<String> names){
+        names.add("Andriy");
+        names.add("Vyfymilian");
+        names.add("Anastasia");
+        names.add("Yura");
+        names.add("Max");
+        names.add("Veronika");
+        names.add("Yana");
+        names.add("Viktor");
+        names.add("Mychailo");
+        names.add("Endry");
+        names.add("Jobert");
+    }
+
+    private void fillSurnames(ArrayList<String> surnames){
+        surnames.add("Debeliak");
+        surnames.add("Sach");
+        surnames.add("Bodnar");
+        surnames.add("Voin");
+        surnames.add("Scacovskii");
+        surnames.add("Legeza");
+        surnames.add("Proziv");
+        surnames.add("Shevchuk");
     }
 }

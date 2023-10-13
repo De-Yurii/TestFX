@@ -33,7 +33,7 @@
 
             <Tab text="Counting Sort">
                 <content>
-                    <fx:include source="MergeSort.fxml"></fx:include>
+                    <fx:include source="CountingSort.fxml"></fx:include>
                 </content>
             </Tab>
 

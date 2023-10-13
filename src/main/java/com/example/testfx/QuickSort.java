@@ -3,6 +3,7 @@ package com.example.testfx;
 import java.util.ArrayList;
 
 public abstract class QuickSort {
+    public static int pivot_index;
     static void swap(int[] arr, int i, int j)
     {
         int temp = arr[i];
@@ -112,6 +113,62 @@ public abstract class QuickSort {
             quickSortInverse(arr, low, pi);
             quickSortInverse(arr, pi+1, high);
         }
+    }
+    static private void swapAlpha(ArrayList<Student> arr, int i, int j){
+        Student temp = arr.get(i);
+        arr.set(i, arr.get(j));
+        arr.set(j, temp);
+    }
+    static private ArrayList<Student> partitionAlpha(ArrayList<Student> arr, int low, int high){
+
+        String pivot;
+        int middle = (high + low) / 2;
+        if (arr.get(middle).getSurname().compareTo(arr.get(low).getSurname())< 0) {
+            swapAlpha(arr, middle, low);
+        }
+        if (arr.get(high).getSurname().compareTo(arr.get(low).getSurname()) < 0) {
+            swapAlpha(arr, high, low);
+        }
+        if (arr.get(middle).getSurname().compareTo(arr.get(high).getSurname()) > 0) {
+            swapAlpha(arr, middle, high);
+        }
+        swapAlpha(arr, middle, high - 1);
+        pivot = arr.get(high - 1).getSurname();
+
+
+
+        int index_pivot = high-1;
+        for (int j = low; j < high - 1; j++) {
+            index_pivot = j;
+            if (arr.get(j).getSurname().compareTo(pivot) >= 0) {
+                for (int i = high - 1; i >= low; i--) {
+                    if (i < j) {
+                        swapAlpha(arr, j, high - 1);
+                        pivot_index = j;
+                        return arr;
+                    }
+                    if (arr.get(i).getSurname().compareTo(pivot) < 0) {
+                        swapAlpha(arr, i, j);
+                        break;
+                    }
+
+                }
+            }
+        }
+        pivot_index = index_pivot;
+        return arr;
+    }
+    static ArrayList<Student> quickSortAlphaberic(ArrayList<Student> arr, int low, int high){
+        if (low < high) {
+
+
+            arr = partitionAlpha(arr, low, high);
+            int pi = pivot_index;
+
+            arr = quickSortAlphaberic(arr, low, pi);
+            arr = quickSortAlphaberic(arr, pi+1, high);
+        }
+        return arr;
     }
     private static int partionLogs(ArrayList<String> logs, int[] arr, int low, int high){
         int pivot = arr[high];
